@@ -16,9 +16,9 @@ export function renderTeam(name, score) {
     const nameDiv = document.createElement('p');
     const scoreDiv = document.createElement('p');
 
-teamDiv.classList.add('team');
-nameDiv.classList.add('name');
-scoreDiv.classList.add('score');
+    teamDiv.classList.add('team');
+    nameDiv.classList.add('name');
+    scoreDiv.classList.add('score');
 
     nameDiv.textContent = name;
     scoreDiv.textContent = score;

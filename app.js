@@ -4,14 +4,12 @@ const currentGameEl = document.getElementById('current-game-container');
 const pastGamesEl = document.getElementById('past-games-container');
 
 const nameForm = document.getElementById('name-form');
-
 const nameFormButton = document.getElementById('name-form-button');
 const teamOneAddButton = document.getElementById('team-one-add-button');
 const teamTwoAddButton = document.getElementById('team-two-add-button');
 const teamOneSubtractButton = document.getElementById('team-one-subtract-button');
 const teamTwoSubtractButton = document.getElementById('team-two-subtract-button');
 const finishGameButton = document.getElementById('finish-game-button');
-
 const teamOneLabel = document.getElementById('team-one-name');
 const teamTwoLabel = document.getElementById('team-two-name');
 
@@ -25,9 +23,10 @@ let currentGame = {
     score2: 0
 };
 
-nameFormButton.addEventListener('click', () => {
+nameFormButton.addEventListener('click', (e) => {
+    e.preventDefault();
 
-    const formData = new FormData(nameForm);
+    const formData = new FormData(nameFormButton);
 
     const name1 = formData.get ('team-one');
     const name2 = formData.get ('team-two');
@@ -42,27 +41,32 @@ nameFormButton.addEventListener('click', () => {
 
 teamOneAddButton.addEventListener('click', () => {
     currentGame.score1++;
+
     refreshCurrentGameEl();
     
 });
 
 teamTwoAddButton.addEventListener('click', () => {
     currentGame.score2++;
+
     refreshCurrentGameEl();
 });
 
 teamOneSubtractButton.addEventListener('click', () => {
     currentGame.score1--;
+
     refreshCurrentGameEl();
 });
 
 teamTwoSubtractButton.addEventListener('click', () => {
-    currentGame.score1--;
+    currentGame.score2--;
+
     refreshCurrentGameEl();
 });
 
 
 finishGameButton.addEventListener('click', () => {
+
     pastGames.push(currentGame);
 
     displayAllGames();

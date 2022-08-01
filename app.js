@@ -4,7 +4,6 @@ const currentGameEl = document.getElementById('current-game-container');
 const pastGamesEl = document.getElementById('past-games-container');
 
 const nameForm = document.getElementById('name-form');
-const nameFormButton = document.getElementById('name-form-button');
 const teamOneAddButton = document.getElementById('team-one-add-button');
 const teamTwoAddButton = document.getElementById('team-two-add-button');
 const teamOneSubtractButton = document.getElementById('team-one-subtract-button');
@@ -23,13 +22,13 @@ let currentGame = {
     score2: 0
 };
 
-nameFormButton.addEventListener('click', (e) => {
+nameForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const formData = new FormData(nameFormButton);
+    const data = new FormData(nameForm);
 
-    const name1 = formData.get ('team-one');
-    const name2 = formData.get ('team-two');
+    const name1 = data.get ('team-one');
+    const name2 = data.get ('team-two');
 
     currentGame.name1 = name1;
     currentGame.name2 = name2;
@@ -38,12 +37,10 @@ nameFormButton.addEventListener('click', (e) => {
     refreshCurrentGameEl();
 });
 
-
 teamOneAddButton.addEventListener('click', () => {
     currentGame.score1++;
 
     refreshCurrentGameEl();
-    
 });
 
 teamTwoAddButton.addEventListener('click', () => {
@@ -64,23 +61,6 @@ teamTwoSubtractButton.addEventListener('click', () => {
     refreshCurrentGameEl();
 });
 
-
-finishGameButton.addEventListener('click', () => {
-
-    pastGames.push(currentGame);
-
-    displayAllGames();
-
-    currentGame = {
-        name1: '',
-        name2: '',
-        score1: 0,
-        score2: 0
-    };
-
-    refreshCurrentGameEl();
-});
-
 function refreshCurrentGameEl() {
     currentGameEl.textContent = '';
 
@@ -94,7 +74,6 @@ function refreshCurrentGameEl() {
     currentGameEl.append(gameEl);
 }
 
-
 function displayAllGames() {
     pastGamesEl.textContent = '';
 
@@ -107,3 +86,17 @@ function displayAllGames() {
     }
 }
 
+finishGameButton.addEventListener('click', () => {
+    pastGames.push(currentGame);
+
+    displayAllGames();
+
+    currentGame = {
+        name1: '',
+        name2: '',
+        score1: 0,
+        score2: 0
+    };
+
+    refreshCurrentGameEl();
+});
